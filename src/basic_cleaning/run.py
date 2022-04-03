@@ -41,6 +41,8 @@ def go(args):
         output_path = os.path.join(tmpdir, args.output_artifact)
         
         logger.info("save output file to csv")
+        idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+        df = df[idx].copy()
         df.to_csv(output_path, index=False)
 
         logger.info(f"Add artifact {args.output_artifact} to wandb")
